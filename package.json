@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -14,11 +20,15 @@
     "typescript"
   ],
   "author": "Karan Yadav",
+  "homepage": "https://github.com/karanBRAVO/nodelpers/blob/main/README.md",
+  "bugs": {
+    "url": "https://github.com/karanBRAVO/nodelpers/issues"
+  },
   "license": "MIT",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karanBRAVO/nodelpers.git"
+    "url": "git+https://github.com/karanBRAVO/nodelpers.git"
   },
   "description": "This project contains helper functions for nodejs.",
   "devDependencies": {
