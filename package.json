@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -18,7 +24,7 @@
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/karanBRAVO/nodelpers.git"
+    "url": "git+https://github.com/karanBRAVO/nodelpers.git"
   },
   "description": "This project contains helper functions for nodejs.",
   "devDependencies": {
