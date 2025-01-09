@@ -7,7 +7,7 @@
     "dist/",
     "README.md",
     "LICENSE",
-    "CHANGELOG",
+    "CHANGELOG.md",
     "CONTRIBUTING.md"
   ],
   "scripts": {
