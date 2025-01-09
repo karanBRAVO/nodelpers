@@ -1,6 +1,0 @@
-node_modules/
-src/
-tsconfig.json
-index.ts
-eslint.config.mjs
-jest.config.ts
