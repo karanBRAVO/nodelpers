@@ -28,7 +28,7 @@
     "url": "https://github.com/karanBRAVO/nodelpers/issues"
   },
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/karanBRAVO/nodelpers.git"
@@ -49,5 +49,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.19.1"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1"
   }
 }
