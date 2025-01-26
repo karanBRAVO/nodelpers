@@ -1,5 +1,9 @@
 import { createHash } from "node:crypto";
-import { ALGORITHMS, type TAlgorithmKey, type TEncoding } from "../lib";
+import {
+  ALGORITHMS,
+  type TAlgorithmKey,
+  type TEncoding,
+} from "../lib/index.ts";
 
 /**
  * Generates a cryptographic hash of a given string using the specified algorithm and encoding.

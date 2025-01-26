@@ -1,3 +1,3 @@
-export * from "./errors/index";
-export * from "./types/index";
-export * from "./constants/crypto.constants";
+export * from "./errors/index.ts";
+export * from "./types/index.ts";
+export * from "./constants/crypto.constants.ts";

@@ -1,4 +1,4 @@
-import { ALGORITHMS } from "../constants";
+import { ALGORITHMS } from "../constants/index.ts";
 import { type BinaryToTextEncoding } from "crypto";
 
 export type TEncoding = BinaryToTextEncoding;

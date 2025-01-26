@@ -1,4 +1,4 @@
-import { InvalidFormatError, InvalidTimeValuesError } from "../lib";
+import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.ts";
 
 /**
  * Convert given seconds to Hours:Minutes:Seconds format.

@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { PathError } from "../lib";
+import { PathError } from "../lib/index.ts";
 
 /**
  * Reads and parses a JSON file.
@@ -38,4 +38,27 @@ export const writeJSON = async (path: string, data: any): Promise<void> => {
   } catch (error) {
     throw new Error(`${error}`);
   }
+};
+
+/**
+ * Creates directories if they do not already exist.
+ *
+ * @param {...string[]} dirs - A list of directory paths to create.
+ *
+ * @example
+ * // Creates the directories 'logs', 'data', and 'temp/1' if they don't already exist.
+ * createDirs('logs', 'data', 'temp/1');
+ */
+export const createDirs = (...dirs: string[]) => {
+  // TODO: Write Jest Tests
+  dirs.forEach((dir) => {
+    try {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    } catch (error) {
+      console.error(`Failed to create directory: ${dir}`, error);
+      throw error;
+    }
+  });
 };
