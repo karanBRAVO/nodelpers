@@ -1,56 +1,65 @@
-import { getDate } from "../utils/date.utils";
+import { TDateFormat } from "../lib";
+import { getFullDate } from "../utils/date.utils";
 
-describe("getDate", () => {
+describe("getFullDate", () => {
   let realDate: DateConstructor;
+  const mockDate = new Date("2024-02-01T12:00:00.000Z");
 
   beforeAll(() => {
     realDate = global.Date;
-  });
-
-  afterAll(() => {
-    global.Date = realDate;
-  });
-
-  beforeEach(() => {
-    jest.resetModules();
-    global.Date = realDate;
-  });
-
-  it("should return a Date object", () => {
-    const result = getDate();
-    expect(result).toBeInstanceOf(Date);
-  });
-
-  it("should return the current date and time", () => {
-    const mockDate = new Date("2024-02-01T12:00:00Z");
     const MockDate = class extends Date {
       constructor() {
         super();
         return mockDate;
       }
     } as DateConstructor;
-
     global.Date = MockDate;
-
-    const result = getDate();
-    expect(result).toEqual(mockDate);
   });
 
-  it("should return a new Date instance each time", () => {
-    const result1 = getDate();
-    const result2 = getDate();
-
-    expect(result1).not.toBe(result2);
-    expect(result1).toBeInstanceOf(Date);
-    expect(result2).toBeInstanceOf(Date);
+  afterAll(() => {
+    global.Date = realDate;
   });
 
-  it("should return a valid date object with expected methods", () => {
-    const result = getDate();
+  it('should return local format when format is "local"', () => {
+    const result = getFullDate("local");
+    expect(typeof result).toBe("string");
+    expect(result).toMatch(/\d{1,2}\/\d{1,2}\/\d{4}/);
+  });
 
-    expect(typeof result.getTime).toBe("function");
-    expect(typeof result.toISOString).toBe("function");
-    expect(typeof result.toLocaleString).toBe("function");
-    expect(Number.isFinite(result.getTime())).toBe(true);
+  it('should return ISO date without time when format is "iso"', () => {
+    const result = getFullDate("iso");
+    expect(result).toBe("2024-02-01");
+    expect(result).not.toContain("T");
+    expect(result).not.toContain("Z");
+  });
+
+  it('should return full ISO string when format is "utc"', () => {
+    const result = getFullDate("utc");
+    expect(result).toBe("2024-02-01T12:00:00.000Z");
+    expect(result).toContain("T");
+    expect(result).toContain("Z");
+  });
+
+  it("should handle all valid format options", () => {
+    const formats: Array<"local" | "iso" | "utc"> = ["local", "iso", "utc"];
+    formats.forEach((format) => {
+      const result = getFullDate(format);
+      expect(typeof result).toBe("string");
+      expect(result.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("should return different results for different formats", () => {
+    const localResult = getFullDate("local");
+    const isoResult = getFullDate("iso");
+    const utcResult = getFullDate("utc");
+
+    expect(localResult).not.toBe(isoResult);
+    expect(isoResult).not.toBe(utcResult);
+    expect(localResult).not.toBe(utcResult);
+  });
+
+  it("should handle invalid format parameter at runtime", () => {
+    expect(() => getFullDate("invalid" as TDateFormat)).not.toThrow();
   });
 });
