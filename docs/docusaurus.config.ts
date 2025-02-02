@@ -60,7 +60,7 @@ const config: Config = {
           items: [
             {
               label: "Getting started",
-              to: "/docs/intro",
+              to: "/docs/what-is-nodelpers",
             },
           ],
         },
