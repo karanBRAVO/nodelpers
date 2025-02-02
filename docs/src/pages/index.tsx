@@ -8,6 +8,8 @@ import Heading from "@theme/Heading";
 
 import styles from "./index.module.css";
 
+import React from "react";
+
 const HomepageHeader = () => {
   const { siteConfig } = useDocusaurusContext();
 
@@ -21,7 +23,7 @@ const HomepageHeader = () => {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro"
+            to="/docs/what-is-nodelpers"
           >
             Nodelpers Intro - 2min ⏱️
           </Link>
