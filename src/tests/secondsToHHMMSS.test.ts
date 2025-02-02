@@ -1,4 +1,4 @@
-import { secondsToHHMMSS } from "../utils/date.utils";
+import { secondsToHHMMSS } from "../utils/time.utils";
 
 describe("secondsToHHMMSS", () => {
   test("should return a string in HH:MM:SS format", () => {

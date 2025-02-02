@@ -1,4 +1,4 @@
-import { HHMMSSToSeconds } from "../utils/date.utils";
+import { HHMMSSToSeconds } from "../utils/time.utils";
 import { InvalidFormatError, InvalidTimeValuesError } from "../lib";
 
 describe("HHMMSSToSeconds", () => {

@@ -20,7 +20,10 @@
   "keywords": [
     "node",
     "npm",
-    "typescript"
+    "typescript",
+    "utility",
+    "helper",
+    "util"
   ],
   "author": "Karan Yadav",
   "homepage": "https://github.com/karanBRAVO/nodelpers/blob/main/README.md",
