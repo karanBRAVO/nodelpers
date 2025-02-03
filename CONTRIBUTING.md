@@ -12,25 +12,43 @@ Make sure `node.js` is installed on your system and we prefer `visual-studio-cod
 
 1. First of all, `fork` this project.
 2. Next -> clone your branch.
+
    ```bash
    git clone https://github.com/<your-user-name>/<nodelpers>.git
    ```
+
    `note`: replace `<your-user-name>` with your github username.
+
 3. Move to cloned dir
+
    ```bash
    cd nodelpers/
    ```
-4. If you want to work on core package then install the packages in the root dir
+
+4. Install [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
+
+5. Use similar node version
+
    ```bash
-   npm install
+   nvm use
    ```
-5. If you want to update the docs then move to `docs` dir
+
+6. If you want to work on core package then install the packages in the root dir
+
+   ```bash
+   npm ci
+   ```
+
+7. If you want to update the docs then move to `docs` dir
+
    ```bash
    cd docs/
    ```
+
    Install the packages using
+
    ```bash
-   npm install
+   npm ci
    ```
 
 Now you have successfully clone the repo!
@@ -45,10 +63,13 @@ To ensure a welcoming environment for all contributors, we follow a Code of Cond
 
 - Ensure your code adheres to the project's style guide. We recommend using `ESLint` and `Prettier` to maintain consistency.
 - Run linting before committing changes:
+
   ```bash
   npm run lint
   ```
+
 - Run prettier to format the code before commiting changes:
+
   ```bash
   npm run format
   ```
@@ -58,17 +79,21 @@ To ensure a welcoming environment for all contributors, we follow a Code of Cond
 - All new features or bug fixes must include appropriate tests.
 - We use Jest for testing. Tests are located in the tests/ folder
 - To run the tests:
+
   ```bash
   npm run test
   ```
+
 - If you add a new utility function, create a corresponding test file in the tests/ directory.
 
 ## Submitting Pull Requests
 
 - Ensure that your changes are made in a feature branch:
+
   ```bash
   git checkout -b feature/your-feature-name
   ```
+
 - Write clear and concise commit messages. Follow Conventional Commits for better versioning and changelogs.
 - Before opening a pull request:
   - Run tests to ensure they pass.
@@ -98,8 +123,10 @@ We welcome suggestions for new features! Please open an issue and include:
 Documentation for `nodelpers` is located in the `docs/` folder, built using Docusaurus.
 
 - To preview the documentation locally:
+
   ```bash
   cd docs/
   npm start
   ```
+
 - Contributions to documentation should follow the same pull request workflow as code changes.
