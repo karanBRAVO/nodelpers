@@ -19,10 +19,12 @@ Make sure `node.js` is installed on your system and we prefer `visual-studio-cod
 
    `note`: replace `<your-user-name>` with your github username.
 
-3. Move to cloned dir
+3. Move to cloned dir and if you want to make changes to our codebase then create new branch
 
    ```bash
    cd nodelpers/
+
+   git checkout -b <your-branch-name>
    ```
 
 4. Install [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
@@ -130,3 +132,43 @@ Documentation for `nodelpers` is located in the `docs/` folder, built using Docu
   ```
 
 - Contributions to documentation should follow the same pull request workflow as code changes.
+
+## Pushing changes
+
+We are assuming that you have made the changes in the code by following above guidelines.
+
+When contributing changes, you need to ensure that your commits are properly signed off. This helps maintain accountability and ensures compliance with contribution policies.
+
+How to [signoff](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt--s) your commit(s)?
+
+1. Commit Your Changes
+
+   ```bash
+   git commit -s -m "Your commit message here"
+   ```
+
+2. Verify Your Commit
+
+   To check if your commit includes a sign-off, run:
+
+   ```bash
+   git log -1
+   ```
+
+   You should see a line like:
+
+   ```bash
+   Signed-off-by: Your Name <your.email@example.com>
+   ```
+
+   If you forgot to sign off, amend the commit with:
+
+   ```bash
+   git commit --amend -s
+   ```
+
+3. Push Your Changes
+
+   ```bash
+   git push origin your-branch
+   ```

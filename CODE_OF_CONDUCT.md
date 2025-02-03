@@ -40,7 +40,7 @@ Examples of unacceptable behavior by participants include:
 
 ## Enforcement
 
-Instances of unacceptable behavior may be reported by contacting the project maintainers at xpresskaran98@gmail.com. All complaints will be reviewed and investigated promptly and fairly.
+Instances of unacceptable behavior may be reported by contacting the project maintainers at <xpresskaran98@gmail.com>. All complaints will be reviewed and investigated promptly and fairly.
 
 Maintainers who do not follow or enforce the `Code of Conduct` may be removed from the project team.
 
