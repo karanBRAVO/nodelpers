@@ -1,51 +1,48 @@
-import { TDateFormat } from "../lib";
-import { getFullDate } from "../utils/date.utils";
-
 describe("getFullDate", () => {
-  let realDate: DateConstructor;
+  let realDate;
   const mockDate = new Date("2024-02-01T12:00:00.000Z");
 
-  beforeAll(() => {
+  before(() => {
     realDate = global.Date;
-    const MockDate = class extends Date {
+    class MockDate extends Date {
       constructor() {
         super();
         return mockDate;
       }
-    } as DateConstructor;
+    }
     global.Date = MockDate;
   });
 
-  afterAll(() => {
+  after(() => {
     global.Date = realDate;
   });
 
   it('should return local format when format is "local"', () => {
     const result = getFullDate("local");
-    expect(typeof result).toBe("string");
-    expect(result).toMatch(/\d{1,2}\/\d{1,2}\/\d{4}/);
+    expect(result).to.be.a("string");
+    expect(result).to.match(/\d{1,2}\/\d{1,2}\/\d{4}/);
   });
 
   it('should return ISO date without time when format is "iso"', () => {
     const result = getFullDate("iso");
-    expect(result).toBe("2024-02-01");
-    expect(result).not.toContain("T");
-    expect(result).not.toContain("Z");
+    expect(result).to.equal("2024-02-01");
+    expect(result).to.not.include("T");
+    expect(result).to.not.include("Z");
   });
 
   it('should return full ISO string when format is "utc"', () => {
     const result = getFullDate("utc");
-    expect(result).toBe("2024-02-01T12:00:00.000Z");
-    expect(result).toContain("T");
-    expect(result).toContain("Z");
+    expect(result).to.equal("2024-02-01T12:00:00.000Z");
+    expect(result).to.include("T");
+    expect(result).to.include("Z");
   });
 
   it("should handle all valid format options", () => {
-    const formats: Array<"local" | "iso" | "utc"> = ["local", "iso", "utc"];
+    const formats = ["local", "iso", "utc"];
     formats.forEach((format) => {
       const result = getFullDate(format);
-      expect(typeof result).toBe("string");
-      expect(result.length).toBeGreaterThan(0);
+      expect(result).to.be.a("string");
+      expect(result.length).to.be.greaterThan(0);
     });
   });
 
@@ -54,12 +51,12 @@ describe("getFullDate", () => {
     const isoResult = getFullDate("iso");
     const utcResult = getFullDate("utc");
 
-    expect(localResult).not.toBe(isoResult);
-    expect(isoResult).not.toBe(utcResult);
-    expect(localResult).not.toBe(utcResult);
+    expect(localResult).to.not.equal(isoResult);
+    expect(isoResult).to.not.equal(utcResult);
+    expect(localResult).to.not.equal(utcResult);
   });
 
   it("should handle invalid format parameter at runtime", () => {
-    expect(() => getFullDate("invalid" as TDateFormat)).not.toThrow();
+    expect(() => getFullDate("invalid")).to.not.throw();
   });
 });

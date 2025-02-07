@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import chalk from "chalk";
 import path from "node:path";
-import { createDirs } from "./fs.utils.ts";
-import type { ILogOptions } from "../lib/index.ts";
+import { createDirs } from "./fs.utils.js";
+import type { ILogOptions } from "../lib/index.js";
 
 /**
  * Logs a message to the console with a specified log level and optionally saves it to a file.

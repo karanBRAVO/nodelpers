@@ -1,4 +1,4 @@
-import { TDateFormat } from "../lib/index.ts";
+import { TDateFormat } from "../lib/index.js";
 
 /**
  * Returns the current date and time as a Date object.

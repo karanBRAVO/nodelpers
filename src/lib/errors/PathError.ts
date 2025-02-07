@@ -1,4 +1,4 @@
-import { BaseError } from "./BaseError.ts";
+import { BaseError } from "./BaseError.js";
 
 /**
  * Ensures given path string is in correct format.

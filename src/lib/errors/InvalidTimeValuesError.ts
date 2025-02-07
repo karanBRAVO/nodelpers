@@ -1,4 +1,4 @@
-import { BaseError } from "./BaseError.ts";
+import { BaseError } from "./BaseError.js";
 
 /**
  * Ensures values are in the correct range

@@ -1,4 +1,4 @@
-import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.ts";
+import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.js";
 
 /**
  * Wait for n milliseconds.
