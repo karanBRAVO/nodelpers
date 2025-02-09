@@ -39,3 +39,23 @@ export const generateStringHash = (
 
   return createHash(algo).update(s).digest(encoding);
 };
+
+/**
+ * Verifies if the provided string, when hashed using the given algorithm and encoding,
+ * matches the provided hash.
+ *
+ * @param {string} s - The input string to be hashed.
+ * @param {string} hash - The expected hash to compare against.
+ * @param {TAlgorithmKey} [algo="SHA256"] - The hashing algorithm to use (default: "SHA256").
+ * @param {TEncoding} [encoding="hex"] - The encoding format of the hash (default: "hex").
+ * @returns {boolean} Returns `true` if the generated hash matches the provided hash, otherwise `false`.
+ */
+export const verifyStringHash = (
+  s: string,
+  hash: string,
+  algo: TAlgorithmKey = "SHA256",
+  encoding: TEncoding = "hex"
+): boolean => {
+  const generatedHash = generateStringHash(s, algo, encoding);
+  return generatedHash === hash;
+};
