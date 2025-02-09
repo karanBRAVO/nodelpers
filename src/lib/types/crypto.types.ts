@@ -1,6 +1,6 @@
-import { ALGORITHMS } from "../constants/index.js";
+import { HASH_ALGORITHMS } from "../constants/index.js";
 import { type BinaryToTextEncoding } from "crypto";
 
 export type TEncoding = BinaryToTextEncoding;
 
-export type TAlgorithmKey = keyof typeof ALGORITHMS;
+export type TAlgorithmKey = keyof typeof HASH_ALGORITHMS;

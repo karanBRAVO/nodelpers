@@ -1,6 +1,12 @@
-import { createHash } from "node:crypto";
 import {
-  ALGORITHMS,
+  createHash,
+  randomBytes,
+  createCipheriv,
+  createDecipheriv,
+} from "node:crypto";
+import {
+  HASH_ALGORITHMS,
+  ENCRYPT_DECRYPT_ALGORITHM,
   type TAlgorithmKey,
   type TEncoding,
 } from "../lib/index.js";
@@ -26,7 +32,7 @@ export const generateStringHash = (
   encoding: TEncoding = "hex"
 ) => {
   const validAlgorithms: TAlgorithmKey[] = Object.keys(
-    ALGORITHMS
+    HASH_ALGORITHMS
   ) as TAlgorithmKey[];
   if (!validAlgorithms.includes(algo)) {
     throw new Error("Unsupported Algorithm.");
@@ -58,4 +64,68 @@ export const verifyStringHash = (
 ): boolean => {
   const generatedHash = generateStringHash(s, algo, encoding);
   return generatedHash === hash;
+};
+
+/**
+ * Generates a random byte buffer of the specified size.
+ *
+ * @param {number} size The number of random bytes to generate.
+ * @returns {Buffer} A buffer containing the generated random bytes.
+ */
+export const generateRandomBytes = (size: number): Buffer => {
+  if (size <= 0 || isNaN(size)) {
+    throw new Error("Invalid size. Size must be a positive number.");
+  }
+  return randomBytes(size);
+};
+
+/**
+ * Encrypts a string using AES-256-CBC.
+ *
+ * @param {string} text - The string to encrypt.
+ * @param {Buffer<ArrayBufferLike>} key 32 bit key
+ * @returns {string} The encrypted string in base64 format.
+ *
+ * @example
+ * const encText = encryptString("Hello, World!", generateRandomBytes(32));
+ */
+export const encryptString = (
+  text: string,
+  key: Buffer<ArrayBufferLike>
+): string => {
+  const IV = generateRandomBytes(16); // Initialization Vector (IV)
+  const cipher = createCipheriv(ENCRYPT_DECRYPT_ALGORITHM, key, IV);
+  let encrypted = cipher.update(text, "utf8", "base64");
+  encrypted += cipher.final("base64");
+  return `${IV.toString("base64")}:${encrypted}`;
+};
+
+/**
+ * Decrypts an encrypted string using AES-256-CBC.
+ *
+ * @param {string} encryptedText The encrypted string in base64 format (includes IV).
+ * @param {Buffer<ArrayBufferLike>} key A 32-byte encryption key (must match the key used for encryption).
+ * @returns {string} The decrypted original string.
+ * @throws {Error} Throws an error if decryption fails.
+ */
+export const decryptString = (
+  encryptedText: string,
+  key: Buffer<ArrayBufferLike>
+): string => {
+  const [iv, encrypted] = encryptedText
+    .split(":")
+    .map((part) => Buffer.from(part, "base64"));
+
+  if (key.length !== 32) {
+    throw new Error("Invalid key size. Key must be 32 bytes for AES-256-CBC.");
+  }
+
+  const decipher = createDecipheriv(ENCRYPT_DECRYPT_ALGORITHM, key, iv);
+  let decrypted = decipher.update(
+    encrypted.toString("base64"),
+    "base64",
+    "utf8"
+  );
+  decrypted += decipher.final("utf8");
+  return decrypted;
 };
