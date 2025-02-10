@@ -7,8 +7,10 @@ import {
 import {
   HASH_ALGORITHMS,
   ENCRYPT_DECRYPT_ALGORITHM,
-  type TAlgorithmKey,
   type TEncoding,
+  type TAlgorithmKey,
+  type TRandomStringOptions,
+  CHAR_GROUPS,
 } from "../lib/index.js";
 
 /**
@@ -128,4 +130,44 @@ export const decryptString = (
   );
   decrypted += decipher.final("utf8");
   return decrypted;
+};
+
+/**
+ * Generates a random string based on the given options.
+ * @param {TRandomStringOptions} options Configuration options for the random string.
+ * @returns {string} The generated random string.
+ */
+export const generateRandomString = (
+  options: TRandomStringOptions = {
+    length: 16,
+    allowedChars: new Set(["alphabet", "number", "special"]),
+  }
+) => {
+  const {
+    length = 16,
+    allowedChars = new Set(["alphabet", "number", "special"]),
+  } = options;
+
+  // Build the character pool based on allowedChars
+  let charPool = "";
+  allowedChars.forEach((charType) => {
+    if (CHAR_GROUPS[charType]) {
+      charPool += CHAR_GROUPS[charType];
+    }
+  });
+
+  if (charPool.length === 0) {
+    throw new Error(
+      "No characters available for selection. Check allowedChars set."
+    );
+  }
+
+  // Generate the random string
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charPool.length);
+    result += charPool[randomIndex];
+  }
+
+  return result;
 };
