@@ -22,7 +22,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          editUrl: "https://github.com/karanBRAVO/nodelpers",
+          editUrl: "https://github.com/karanBRAVO/nodelpers/tree/main/docs",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -73,7 +73,7 @@ const config: Config = {
             },
             {
               label: "Discord",
-              href: "https://discordapp.com/invite/nodelpers",
+              href: "https://discord.gg/XMcUSAat",
             },
             {
               label: "X",
