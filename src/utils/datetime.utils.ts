@@ -1,5 +1,5 @@
 import { MONTH_NAMES } from "../lib/constants/datetime.constants.js";
-import { TDateFormat, TDate } from "../lib/index.js";
+import { TDateFormat, TDate, TDateUnits } from "../lib/index.js";
 import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.js";
 
 /**
@@ -123,4 +123,38 @@ export const getMonth = (
     return MONTH_NAMES[monthIndex];
   }
   return monthIndex;
+};
+
+/**
+ * Returns the absolute difference between two dates in the specified unit.
+ *
+ * @param d1 {TDate} - The first date.
+ * @param d2 {TDate} - The second date.
+ * @param unit {TDateUnits} - The unit of difference (default: "milliseconds").
+ * @param absolute {boolean} - Whether to return an absolute difference (default: true).
+ * @returns {number} The difference between d1 and d2 in the specified unit (i.e. d1 - d2).
+ */
+export const dateDiff = (
+  d1: TDate,
+  d2: TDate,
+  unit: TDateUnits = "milliseconds",
+  absolute: boolean = true
+): number => {
+  const date1 = getDate(d1);
+  const date2 = getDate(d2);
+  const diffInMs = date1.getTime() - date2.getTime();
+
+  const conversions = {
+    milliseconds: 1,
+    second: 1000,
+    minute: 1000 * 60,
+    hour: 1000 * 60 * 60,
+    day: 1000 * 60 * 60 * 24,
+    month: 1000 * 60 * 60 * 24 * 30.44,
+    year: 1000 * 60 * 60 * 24 * 365.25,
+  };
+
+  let result = diffInMs / conversions[unit];
+
+  return absolute ? Math.abs(result) : result;
 };
