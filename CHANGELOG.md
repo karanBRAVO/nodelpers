@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.0
+
+March 2025, 11
+
+- [918af61](https://github.com/karanBRAVO/nodelpers/commit/918af612c85be67bceb64e57f3e253c37bbad502) - [2fee132](https://github.com/karanBRAVO/nodelpers/commit/2fee132bf87bfd4ad94785ac93ba67ddf9451c8b)
+
 ## v0.1.0
 
 January 2025, 26
