@@ -198,3 +198,11 @@ export const addTime = (date: TDate, value: number, unit: TDateUnits): Date => {
 
   return parsedDate;
 };
+
+export const dateBasedOnTimezone = (timeZone: string, date?: TDate): Date => {
+  const parsedDate = getDate(date);
+
+  const localeString = parsedDate.toLocaleString("en-US", { timeZone });
+
+  return new Date(localeString);
+};
