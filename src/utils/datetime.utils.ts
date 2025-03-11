@@ -1,3 +1,4 @@
+import { MONTH_NAMES } from "../lib/constants/datetime.constants.js";
 import { TDateFormat, TDate } from "../lib/index.js";
 import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.js";
 
@@ -103,4 +104,23 @@ export const getFullDate = (format: TDateFormat, date?: TDate): string => {
 export const getYear = (date?: TDate): number => {
   const parsedDate = getDate(date);
   return parsedDate.getFullYear();
+};
+
+/**
+ * Returns the month of the current date.
+ *
+ * @param date {TDate} - The date to parse.
+ * @param asString {boolean} - Whether to return the month as a name instead of index.
+ * @returns {number} The month of the current date (0-11).
+ */
+export const getMonth = (
+  date?: TDate,
+  asString: boolean = false
+): number | string => {
+  const parsedDate = getDate(date);
+  const monthIndex = parsedDate.getMonth();
+  if (asString) {
+    return MONTH_NAMES[monthIndex];
+  }
+  return monthIndex;
 };
