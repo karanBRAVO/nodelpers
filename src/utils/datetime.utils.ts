@@ -221,3 +221,18 @@ export const dateBasedOnTimezone = (timeZone: string, date?: TDate): Date => {
   const localeString = parsedDate.toLocaleString("en-US", { timeZone });
   return new Date(localeString);
 };
+
+/**
+ * Returns the day of the week for the given date.
+ *
+ * @param date {TDate} - The date to parse.
+ * @param fullName {boolean} - Whether to return the full day name (e.g., "Monday") or short (e.g., "Mon").
+ * @returns {string} The day of the week.
+ */
+export const getDay = (date?: TDate, fullName: boolean = true): string => {
+  const parsedDate = getDate(date);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: fullName ? "long" : "short",
+  };
+  return new Intl.DateTimeFormat("en-US", options).format(parsedDate);
+};
