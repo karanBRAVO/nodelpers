@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import * as NodePath from "node:path";
-import { PathError, TListDirOptions, TPath } from "../lib/index.js";
+import { PathError, TFileMode, TListDirOptions, TPath } from "../lib/index.js";
 
 /**
  * Checks if the given path is a directory.
@@ -154,4 +154,112 @@ export const listDir = (
   } catch {
     return [];
   }
+};
+
+/**
+ * Main class for file handling. Use factory method `openFile` to create an instance.
+ */
+export class FileHandler {
+  private fileHandle: fs.promises.FileHandle | null = null;
+  private mode: TFileMode;
+  private path: TPath;
+
+  constructor(mode: TFileMode, path: TPath) {
+    this.mode = mode;
+    this.path = path;
+  }
+
+  /**
+   * Opens the file.
+   */
+  async open() {
+    if (!this.fileHandle) {
+      this.fileHandle = await fs.promises.open(this.path, this.mode);
+    }
+  }
+
+  /**
+   * Reads the file content.
+   * @returns {Promise<string>}
+   */
+  async read(): Promise<string> {
+    if (this.mode !== "r") {
+      throw new Error("File is not opened in read mode");
+    }
+    await this.open();
+    const buffer = await this.fileHandle!.readFile("utf-8");
+    return buffer.toString();
+  }
+
+  /**
+   * Writes data to the file.
+   * @param data {string} - Data to write.
+   */
+  async write(data: string) {
+    if (this.mode !== "w") {
+      throw new Error("File is not opened in write mode");
+    }
+    await this.open();
+    await this.fileHandle!.writeFile(data, "utf-8");
+  }
+
+  /**
+   * Appends data to the file.
+   * @param data {string} - Data to append.
+   */
+  async append(data: string) {
+    if (this.mode !== "a") {
+      throw new Error("File is not opened in append mode");
+    }
+    await this.open();
+    await this.fileHandle!.appendFile(data, "utf-8");
+  }
+
+  /**
+   * Closes the file.
+   */
+  async close() {
+    if (this.fileHandle) {
+      await this.fileHandle.close();
+      this.fileHandle = null;
+    }
+  }
+}
+
+/**
+ * Opens a file with the specified mode and returns an object to perform read/write operations.
+ *
+ * @param {TFileMode} mode - The mode in which to open the file:
+ *   - `"r"`: Read mode (throws an error if file doesn't exist).
+ *   - `"w"`: Write mode (creates/overwrites the file).
+ *   - `"a"`: Append mode (creates file if it doesn’t exist).
+ * @param {TPath} path - The file path.
+ * @returns
+ *   - `read()`: Reads the file content (available only in `"r"` mode).
+ *   - `write(content)`: Writes/appends content (available in `"w"` and `"a"` modes).
+ *   - `close()`: Closes the file.
+ *
+ * @throws {Error} If the file cannot be opened.
+ *
+ * @example
+ * // Reading a file
+ * const file = await openFile("r", "example.txt");
+ * const content = await file.read();
+ * console.log(content);
+ * await file.close();
+ *
+ * @example
+ * // Writing to a file
+ * const file = await openFile("w", "example.txt");
+ * await file.write("Hello, world!");
+ * await file.close();
+ *
+ * @example
+ * // Appending to a file
+ * const file = await openFile("a", "example.txt");
+ * await file.append(" Appended content!");
+ * await file.close();
+ */
+export const openFile = (mode: TFileMode, path: TPath): FileHandler => {
+  return new FileHandler(mode, path);
 };
