@@ -1,7 +1,7 @@
 ---
 id: pre-requisites
 sidebar_label: Pre-Requisites
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Pre-Requisites

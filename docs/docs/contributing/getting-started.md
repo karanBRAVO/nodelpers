@@ -1,7 +1,7 @@
 ---
 id: getting-started
 sidebar_label: Getting Started
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Getting Started
