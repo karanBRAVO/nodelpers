@@ -12,8 +12,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "mocha --require ./src/tests/setup.js",
-    "testall": "mocha --require ./src/tests/setup.js ./src/tests/**/*.js",
+    "test": "mocha --require ./src/tests/setup.js ./src/tests/**/*.js",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
