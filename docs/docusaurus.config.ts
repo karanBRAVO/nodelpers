@@ -50,6 +50,11 @@ const config: Config = {
           label: "GitHub",
           position: "right",
         },
+        {
+          href: "https://www.npmjs.com/package/nodelpers",
+          label: "NPM",
+          position: "right",
+        },
       ],
     },
     footer: {
@@ -87,6 +92,10 @@ const config: Config = {
             {
               label: "GitHub",
               href: "https://github.com/karanBRAVO/nodelpers",
+            },
+            {
+              label: "NPM",
+              href: "https://www.npmjs.com/package/nodelpers",
             },
           ],
         },
