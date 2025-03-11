@@ -158,3 +158,43 @@ export const dateDiff = (
 
   return absolute ? Math.abs(result) : result;
 };
+
+/**
+ * Adds or subtracts the specified amount of time to/from a date.
+ *
+ * @param date {TDate} - The base date.
+ * @param value {number} - The amount of time to add (positive) or subtract (negative).
+ * @param unit {TDateUnits} - The unit of time to modify.
+ * @returns {Date} The new modified date.
+ */
+export const addTime = (date: TDate, value: number, unit: TDateUnits): Date => {
+  const parsedDate = getDate(date);
+
+  switch (unit) {
+    case "year":
+      parsedDate.setFullYear(parsedDate.getFullYear() + value);
+      break;
+    case "month":
+      parsedDate.setMonth(parsedDate.getMonth() + value);
+      break;
+    case "day":
+      parsedDate.setDate(parsedDate.getDate() + value);
+      break;
+    case "hour":
+      parsedDate.setHours(parsedDate.getHours() + value);
+      break;
+    case "minute":
+      parsedDate.setMinutes(parsedDate.getMinutes() + value);
+      break;
+    case "second":
+      parsedDate.setSeconds(parsedDate.getSeconds() + value);
+      break;
+    case "milliseconds":
+      parsedDate.setMilliseconds(parsedDate.getMilliseconds() + value);
+      break;
+    default:
+      throw new Error(`Invalid unit: ${unit}`);
+  }
+
+  return parsedDate;
+};
