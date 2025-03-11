@@ -51,4 +51,10 @@ describe("getDate", () => {
     expect(result.toLocaleString).to.be.a("function");
     expect(Number.isFinite(result.getTime())).to.be.true;
   });
+
+  it("should return the correct date when a Date object is provided", () => {
+    const date = new Date("2025-03-11T12:00:00Z");
+    const result = getDate(date);
+    expect(result).to.deep.equal(date);
+  });
 });

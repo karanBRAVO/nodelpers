@@ -1,3 +1,4 @@
+import { TDateFormat, TDate } from "../lib/index.js";
 import { InvalidFormatError, InvalidTimeValuesError } from "../lib/index.js";
 
 /**
@@ -58,3 +59,48 @@ export function HHMMSSToSeconds(timeString: string): number {
 
   return hours * 3600 + minutes * 60 + seconds;
 }
+
+/**
+ * Returns the current date and time as a Date object.
+ *
+ * @returns {Date} The current date and time.
+ */
+export const getDate = (date?: TDate): Date => {
+  return date ? new Date(date) : new Date();
+};
+
+/**
+ * Formats the current date according to the specified format.
+ *
+ * @param {TDateFormat} format - The desired date format
+ *   - 'local': Returns date in local format (e.g., "2/1/2024, 12:00:00 PM")
+ *   - 'iso': Returns date in ISO format without time (e.g., "2024-02-01")
+ *   - 'utc': Returns full ISO string (e.g., "2024-02-01T12:00:00.000Z")
+ * @param {TDate} date - The date to parse.
+ * @returns {string} The formatted date string
+ */
+export const getFullDate = (format: TDateFormat, date?: TDate): string => {
+  const parsedDate = getDate(date);
+
+  let dateString: string = "";
+
+  if (format === "local") {
+    dateString = parsedDate.toLocaleString();
+  } else if (format === "iso") {
+    dateString = parsedDate.toISOString().split("T")[0];
+  } else {
+    dateString = parsedDate.toISOString();
+  }
+
+  return dateString;
+};
+
+/**
+ * Returns the full year of the current date.
+ *
+ * @returns {number} The four-digit full year (e.g., 2025).
+ */
+export const getYear = (date?: TDate): number => {
+  const parsedDate = getDate(date);
+  return parsedDate.getFullYear();
+};

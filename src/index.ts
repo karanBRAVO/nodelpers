@@ -1,8 +1,7 @@
 // utils/
 export * from "./utils/number.utils.js";
-export * from "./utils/date.utils.js";
+export * from "./utils/datetime.utils.js";
 export * from "./utils/string.utils.js";
-export * from "./utils/time.utils.js";
 export * from "./utils/fs.utils.js";
 export * from "./utils/crypto.utils.js";
 export * from "./utils/validator.utils.js";
