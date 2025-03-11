@@ -198,3 +198,26 @@ export const addTime = (date: TDate, value: number, unit: TDateUnits): Date => {
 
   return parsedDate;
 };
+
+/**
+ * Converts a given date (or current date) to a specific time zone.
+ *
+ * @param {string} timeZone - The IANA time zone name (e.g., "America/New_York", "Asia/Kolkata").
+ * @param {TDate} [date] - The optional date to convert. If not provided, the current date is used.
+ * @returns {Date} A new Date object representing the time in the specified time zone.
+ *
+ * @example
+ * // Convert the current date-time to India Standard Time (IST)
+ * const istDate = dateBasedOnTimezone("Asia/Kolkata");
+ * console.log(istDate); // Date object with IST time
+ *
+ * @example
+ * // Convert a given UTC date-time to Eastern Standard Time (EST)
+ * const estDate = dateBasedOnTimezone("America/New_York", "2025-03-11T12:00:00Z");
+ * console.log(estDate); // Date object with EST time
+ */
+export const dateBasedOnTimezone = (timeZone: string, date?: TDate): Date => {
+  const parsedDate = getDate(date);
+  const localeString = parsedDate.toLocaleString("en-US", { timeZone });
+  return new Date(localeString);
+};
