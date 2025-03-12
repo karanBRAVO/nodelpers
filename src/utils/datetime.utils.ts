@@ -67,7 +67,7 @@ export function HHMMSSToSeconds(timeString: string): number {
  * @returns {Date} The current date and time.
  */
 export const getDate = (date?: TDate): Date => {
-  return date ? new Date(date) : new Date();
+  return date !== undefined ? new Date(date) : new Date();
 };
 
 /**
@@ -235,4 +235,32 @@ export const getDay = (date?: TDate, fullName: boolean = true): string => {
     weekday: fullName ? "long" : "short",
   };
   return new Intl.DateTimeFormat("en-US", options).format(parsedDate);
+};
+
+/**
+ * Gets the `Unix` timestamp.
+ * @param {Date|string|number} [date] - Optional date parameter. Can be a `Date` object,
+ * `ISO` date string, or milliseconds since epoch. If not provided, returns the current timestamp.
+ * @returns {number} The `Unix` timestamp in seconds (number of seconds elapsed since January 1, 1970 00:00:00 UTC).
+ *
+ */
+export const getUnixTimestamp = (date?: TDate): number => {
+  const parsedDate = getDate(date);
+  return Math.floor(parsedDate.getTime() / 1000);
+};
+
+/**
+ * Converts a Unix timestamp (seconds) to a JavaScript `Date` object.
+ * @param timestamp - The Unix timestamp in seconds.
+ * @returns {Date} A Date object representing the given timestamp.
+ */
+export const unixTimestampToDate = (timestamp: number): Date => {
+  if (
+    timestamp === null ||
+    timestamp === undefined ||
+    typeof timestamp !== "number"
+  ) {
+    throw new Error("Invalid timestamp");
+  }
+  return getDate(timestamp * 1000);
 };
