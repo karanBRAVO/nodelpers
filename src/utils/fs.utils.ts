@@ -263,3 +263,33 @@ export class FileHandler {
 export const openFile = (mode: TFileMode, path: TPath): FileHandler => {
   return new FileHandler(mode, path);
 };
+
+class InMemoryFileSystem {
+  private storage: Record<string, string>; // Stores file paths and contents
+
+  constructor() {
+    this.storage = {};
+  }
+
+  writeFile(path: string, content: string): void {
+    this.storage[path] = content;
+  }
+
+  readFile(path: string): string {
+    if (!(path in this.storage)) {
+      throw new Error("File not found");
+    }
+    return this.storage[path];
+  }
+
+  deleteFile(path: string): void {
+    if (!(path in this.storage)) {
+      throw new Error("File not found");
+    }
+    delete this.storage[path];
+  }
+
+  listFiles(): string[] {
+    return Object.keys(this.storage);
+  }
+}
